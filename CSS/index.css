@@ -26,8 +26,19 @@
 }
 
 button {
-    background-color: orange;
-    color: #232323;
+    background-color: #59606d;
+    color: #ffffff;
     text-decoration: none;
     margin-left: 200px;
+}
+
+#access,
+#withdraw,
+#deposit,
+#getBal {
+    margin: 40px;
+}
+
+.createAccount {
+    margin: 40px;
 }

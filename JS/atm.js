@@ -5,8 +5,11 @@
 //bank accounts that are already exisiting
 
 let currentAcctIndex;
-
+myStorage = localStorage;
 let bankAccounts = [];
+if (window.localStorage["bankAccounts"] !== undefined) {
+    bankAccounts = JSON.parse(window.localStorage.getItem('bankAccounts'));
+}
 
 
 function getAccount() {
@@ -16,7 +19,7 @@ function getAccount() {
             document.getElementById("account").innerHTML = bankAccounts[i].balance;
             currentAcctIndex = i;
 
-            console.log(JSON.parse(window.localStorage.getItem('bankAccounts')));
+
             return;
             //  return bankAccounts[i]; 
         }
@@ -25,7 +28,7 @@ function getAccount() {
     //I need to create an option that allows the user to create a bank account with a unqiue pin
     alert("Invaliad PIN!")
     if (confirm("Would you like an account?")) {
-        window.location = "atm.html";
+        window.location = "index.html";
     }
 
 }
@@ -36,17 +39,24 @@ function createAccount() {
         "pin": pin,
         "balance": 0
     };
+    for (let i = 0; i < bankAccounts.length; i++) {
+        if (bankAccounts[i].pin === pin) {
+            alert('You already have an account!');
+            if (confirm("Would like access your account?")) {
+                window.location = "atm.html"
+            }
+            return;
+        }
+    }
 
 
     bankAccounts.push(newAccount);
-
-
-    alert('Your Account Has Been Created!')
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
 
+    alert('Your Account Has Been Created!')
 
     if (confirm("Would like access your account?")) {
-        window.location = "index.html"
+        window.location = "atm.html"
 
     }
     return;
@@ -57,6 +67,7 @@ function createAccount() {
 function withdraw() {
     let amount = parseInt(document.getElementById("withd").value);
     bankAccounts[currentAcctIndex].balance -= amount;
+    window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
     document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
 //create a function to deposit money into the indexed account
@@ -64,6 +75,7 @@ function withdraw() {
 function deposit() {
     let addMoney = parseInt(document.getElementById("depo").value);
     bankAccounts[currentAcctIndex].balance += addMoney;
+    window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
     document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
 //create a function to check the balance of the currentAccount

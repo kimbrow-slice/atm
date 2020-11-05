@@ -2,7 +2,7 @@
     width: 800px;
     height: auto;
     position: relative;
-    padding-left: 100px;
+    margin-left: 125px;
 }
 
 @media (max-width: 800px) {
@@ -10,7 +10,7 @@
         width: 345px;
         height: auto;
         position: relative;
-        padding-left: 20px;
+        margin-left: 5px;
     }
 }
 
@@ -32,6 +32,11 @@ button {
     margin-left: 200px;
 }
 
+p {
+    font-family: 'Space Grotesk', sans-serif;
+    color: #59606d;
+}
+
 #access,
 #withdraw,
 #deposit,
@@ -41,4 +46,19 @@ button {
 
 .createAccount {
     margin: 40px;
+}
+
+h2 {
+    color: #59606d;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.home:hover {
+    color: #eb4e05;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.home {
+    color: #59606d;
+    font-family: 'Space Grotesk', sans-serif;
 }

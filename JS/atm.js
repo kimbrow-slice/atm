@@ -18,8 +18,13 @@ function getAccount() {
         if (bankAccounts[i].pin === pin) {
             document.getElementById("account").innerHTML = bankAccounts[i].balance;
             currentAcctIndex = i;
+            window.localStorage.setItem('currentAcctIndex', i);
 
 
+            if (confirm('Want to make a transaction?')) {
+                //store active pin in local storage 
+                window.location = "transaction.html";
+            }
             return;
             //  return bankAccounts[i]; 
         }
@@ -27,7 +32,7 @@ function getAccount() {
     }
     //I need to create an option that allows the user to create a bank account with a unqiue pin
     alert("Invaliad PIN!")
-    if (confirm("Would you like an account?")) {
+    if (confirm("Would you like to create an account?")) {
         window.location = "index.html";
     }
 
@@ -57,7 +62,6 @@ function createAccount() {
 
     if (confirm("Would like access your account?")) {
         window.location = "atm.html"
-
     }
     return;
 }
@@ -65,6 +69,8 @@ function createAccount() {
 //create a function to withdraw money into the indexed account
 
 function withdraw() {
+    //let acct = acctExist(pin);
+    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
     let amount = parseInt(document.getElementById("withd").value);
     bankAccounts[currentAcctIndex].balance -= amount;
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
@@ -73,6 +79,8 @@ function withdraw() {
 //create a function to deposit money into the indexed account
 
 function deposit() {
+    //let acct =acctExist(pin from local storage); 
+    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
     let addMoney = parseInt(document.getElementById("depo").value);
     bankAccounts[currentAcctIndex].balance += addMoney;
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
@@ -88,13 +96,7 @@ function getBalance() {
 
 //function 6 Change pin of the bank account
 /*
-function myFunctionName(parameter) {
-    for (let key in object) {
-        if (typeof object[key] == "number") {
-            then object[key(that is a number)] *= 2;
-        }
-    }
-}*/
+ */
 
 //we are going to create a for in function that allows for the user to input a 4 digit pin(if any more digits than 4 are input it should alert the user with an invalid input option)
 

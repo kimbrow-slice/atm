@@ -1,99 +1,85 @@
 /* I need to create a program that simulates a functional ATM with the following abilities */
 
-
-// Creation of account with unqiue pin
 //function 1 
-//I need to create a function that allows the user to create a bank account with a unqiue pin
+
+//bank accounts that are already exisiting
+
+let currentAcctIndex;
+
+let bankAccounts = [];
 
 
-let creds = {
-    uName: " ", //make these prompts or inputs? if inputs what other code would I need to input for this to work?
-    //document.write(new uName() == new pin());???
-    pin: Number(" ")
-};
+function getAccount() {
+    let pin = parseFloat(document.getElementById("pinput").value);
+    for (let i = 0; i < bankAccounts.length; i++) {
+        if (bankAccounts[i].pin === pin) {
+            document.getElementById("account").innerHTML = bankAccounts[i].balance;
+            currentAcctIndex = i;
+            return;
+            //  return bankAccounts[i]; 
+        }
 
-function uName(); { return creds; }
-//function uName() returns object creds
-function pin(); { return creds; }
-//function pin() returns object creds
-
-
-
-// PIN Authorization for account holders
-//function 2 - for in loop I need to use a for loop
-
-function pinAuth() {
-    if (let myKey in pinAuth) {
-        return false;
     }
-    return true;
+    //I need to create an option that allows the user to create a bank account with a unqiue pin
+    alert("Invaliad PIN!")
+    if (confirm("Would you like an account?")) {
+        window.location = "atm.html";
+    }
+
 }
 
-
-// Deposit money into account and print new available balance
-//function 3 
-
-function Accumulator(startingValue) {
-    this.value = startingValue;
-
-    this.read = function() {
-        this.value += +prompt('How much to add?', 500);
+function createAccount() {
+    let pin = parseFloat(document.getElementById('getAcct').value);
+    let newAccount = {
+        "pin": pin,
+        "balance": 0
     };
-
-}
-let accumulator = new Accumulator(500); // initial value (CURRENT BANK ACCOUNT BALANCE?)
-
-
-accumulator.read(); // adds the user-entered value
-
-alert(accumulator.value); // shows the sum of these values
-
-
-// Withdrawal money from account and print new available balance
-//function 4
-function A() {
-    //creating a constructor function called Calculator
-    //this = {...}
-
-    this.withdrawal = function() {
-        this.a = -prompt('Starting Balance', 0);
-        //we are entering the first value of the read function
-        this.b = -prompt('Withdrawal amount?', 0);
-        //we enter the second value of the read function
-    };
-    //this is creating the empty object so if we compare how we put together our calculator in object methods. We can do this the same way except we are going create functions with each portion instead. 
-    this.balance = function() {
-        return this.b - this.a;
-    };
+    bankAccounts.push(newAccount);
+    //for (let i = 0; i < bankAccounts.length; i++) {
+    //    document.getElementById("account").innerHTML = "balance: " + bankAccounts[i].balance + " pin: " + bankAccounts[i].pin + "<br> ";
+    //}
+    alert('Your Account Has Been Created!')
+    if (confirm("Would like access your account?")) {
+        window.location = "index.html"
+    }
+    return;
 }
 
-let calculator = new A();
-calculator.withdrawal();
+//create a function to withdraw money into the indexed account
 
-alert("Balance=" + calculator.balance());
-
-
-// Balance Inquery
-//function 5
-/*function BalanceInq() {
-    call back to the previous functions (Withdrawls function returns a balance value)
-    ...some code here
+function withdraw() {
+    let amount = Number(document.getElementById("withd").value);
+    bankAccounts[currentAcctIndex].balance -= amount;
+    document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
-*/
+//create a function to deposit money into the indexed account
 
-// Change pin of the bank account
-//function 6
+function deposit() {
+    let addMoney = Number(document.getElementById("depo").value);
+    bankAccounts[currentAcctIndex].balance += addMoney;
+    document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+}
+//create a function to check the balance of the currentAccount
+
+function getBalance() {
+
+    document.getElementById("currentBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+}
+
+
+//function 6 Change pin of the bank account
+/*
 function myFunctionName(parameter) {
     for (let key in object) {
         if (typeof object[key] == "number") {
             then object[key(that is a number)] *= 2;
         }
     }
-}
+}*/
 
 //we are going to create a for in function that allows for the user to input a 4 digit pin(if any more digits than 4 are input it should alert the user with an invalid input option)
 
 
 // USE LOCAL STORAGE FOR ACCESS ACROSS SESSIONS
 //function 7
-//read the debugging and exploring of the color game to view how we set local storage to session storage and reverse engineer that to make it where each input it kept throughout multiple session
+//read the debugging and exploring of the color game lab to view how we set local storage to session storage and reverse engineer that to make it where each input it kept throughout multiple session

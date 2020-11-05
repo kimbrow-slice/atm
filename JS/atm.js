@@ -10,11 +10,13 @@ let bankAccounts = [];
 
 
 function getAccount() {
-    let pin = parseFloat(document.getElementById("pinput").value);
+    let pin = parseInt(document.getElementById("pinput").value);
     for (let i = 0; i < bankAccounts.length; i++) {
         if (bankAccounts[i].pin === pin) {
             document.getElementById("account").innerHTML = bankAccounts[i].balance;
             currentAcctIndex = i;
+
+            console.log(JSON.parse(window.localStorage.getItem('bankAccounts')));
             return;
             //  return bankAccounts[i]; 
         }
@@ -29,18 +31,23 @@ function getAccount() {
 }
 
 function createAccount() {
-    let pin = parseFloat(document.getElementById('getAcct').value);
+    let pin = parseInt(document.getElementById('getAcct').value);
     let newAccount = {
         "pin": pin,
         "balance": 0
     };
+
+
     bankAccounts.push(newAccount);
-    //for (let i = 0; i < bankAccounts.length; i++) {
-    //    document.getElementById("account").innerHTML = "balance: " + bankAccounts[i].balance + " pin: " + bankAccounts[i].pin + "<br> ";
-    //}
+
+
     alert('Your Account Has Been Created!')
+    window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+
+
     if (confirm("Would like access your account?")) {
         window.location = "index.html"
+
     }
     return;
 }
@@ -48,14 +55,14 @@ function createAccount() {
 //create a function to withdraw money into the indexed account
 
 function withdraw() {
-    let amount = Number(document.getElementById("withd").value);
+    let amount = parseInt(document.getElementById("withd").value);
     bankAccounts[currentAcctIndex].balance -= amount;
     document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
 //create a function to deposit money into the indexed account
 
 function deposit() {
-    let addMoney = Number(document.getElementById("depo").value);
+    let addMoney = parseInt(document.getElementById("depo").value);
     bankAccounts[currentAcctIndex].balance += addMoney;
     document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
@@ -83,3 +90,9 @@ function myFunctionName(parameter) {
 // USE LOCAL STORAGE FOR ACCESS ACROSS SESSIONS
 //function 7
 //read the debugging and exploring of the color game lab to view how we set local storage to session storage and reverse engineer that to make it where each input it kept throughout multiple session
+
+// myStorage = window.localStorage;
+
+// window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+
+// console.log(JSON.parse(window.localStorage.getItem('bankAccounts')));

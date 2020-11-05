@@ -5,16 +5,29 @@
     padding-left: 100px;
 }
 
+@media (max-width: 800px) {
+    .logo {
+        width: 345px;
+        height: auto;
+        position: relative;
+        padding-left: 20px;
+    }
+}
+
 * {
     text-align: center;
 }
 
-.Balance {
-    color: #232323;
-    outline: none;
+@media (max-width: 800px) {
+    * {
+        font-size: 12px;
+        text-align: center;
+    }
 }
 
-.Balance:hover {
-    outline: none;
+button {
+    background-color: orange;
     color: #232323;
+    text-decoration: none;
+    margin-left: 200px;
 }

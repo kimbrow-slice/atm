@@ -21,10 +21,7 @@ function getAccount() {
             window.localStorage.setItem('currentAcctIndex', i);
 
 
-            if (confirm('Want to make a transaction?')) {
-                //store active pin in local storage 
-                window.location = "transaction.html";
-            }
+
             return;
             //  return bankAccounts[i]; 
         }
@@ -89,7 +86,7 @@ function deposit() {
 //create a function to check the balance of the currentAccount
 
 function getBalance() {
-
+    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
     document.getElementById("currentBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
 

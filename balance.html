@@ -36,19 +36,20 @@
             <h2>Welcome to the
                 <strong>SkilledKC Credit Union</strong>
             </h2>
-            <a class="home" href="transaction.html">Make A Transaction</a> ||
 
-            <a class="home" href="balance.html">Check Balance</a> ||
+            <a class="home" href="atm.html">Main Menu</a> ||
+
+            <a class="home" href="transaction.html">Make A Transaction</a> ||
 
             <a class="home" href="index.html">Sign Out</a>
 
-            <div id="access">
-                <p>Input Your PIN:</p>
-                <input id="pinput">
-                <button onclick="getAccount()">Submit</button>
-                <p>Available Balance:</p>
-                <p id="account">
-                </p>
+
+
+            <div id="getBal">
+                <p>Would You Like To Check Your Balance?</p>
+                <button class="Balance" onclick="getBalance()">Balance</button>
+                <p>Current Balance:</p>
+                <p id="currentBalance"></p>
             </div>
 
         </div>

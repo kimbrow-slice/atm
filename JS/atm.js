@@ -7,14 +7,18 @@
 let currentAcctIndex;
 myStorage = localStorage;
 let bankAccounts = [];
+
 if (window.localStorage["bankAccounts"] !== undefined) {
     bankAccounts = JSON.parse(window.localStorage.getItem('bankAccounts'));
 }
 
 
 function getAccount() {
+
     let pin = parseInt(document.getElementById("pinput").value);
+
     for (let i = 0; i < bankAccounts.length; i++) {
+
         if (bankAccounts[i].pin === pin) {
             document.getElementById("account").innerHTML = bankAccounts[i].balance;
             currentAcctIndex = i;
@@ -29,6 +33,7 @@ function getAccount() {
     }
     //I need to create an option that allows the user to create a bank account with a unqiue pin
     alert("Invaliad PIN!")
+
     if (confirm("Would you like to create an account?")) {
         window.location = "index.html";
     }
@@ -36,17 +41,23 @@ function getAccount() {
 }
 
 function createAccount() {
+
     let pin = parseInt(document.getElementById('getAcct').value);
     let newAccount = {
+
         "pin": pin,
         "balance": 0
     };
+
     for (let i = 0; i < bankAccounts.length; i++) {
+
         if (bankAccounts[i].pin === pin) {
             alert('You already have an account!');
+
             if (confirm("Would like access your account?")) {
                 window.location = "atm.html"
             }
+
             return;
         }
     }
@@ -68,13 +79,16 @@ function createAccount() {
 function withdraw() {
     //let acct = acctExist(pin);
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+
     let amount = parseInt(document.getElementById("withd").value);
     // if (account[currentAcctIndex].balance <= amount) {
     //     alert("Sorry, you do not have enough within your account!")
     // }
     // else if (account[currentAcctIndex].balance = amount ){
     bankAccounts[currentAcctIndex].balance -= amount;
+
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+
     document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
 //}
@@ -83,15 +97,21 @@ function withdraw() {
 function deposit() {
     //let acct =acctExist(pin from local storage); 
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+
     let addMoney = parseInt(document.getElementById("depo").value);
+
     bankAccounts[currentAcctIndex].balance += addMoney;
+
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+
     document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
 //create a function to check the balance of the currentAccount
 
 function getBalance() {
+
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+
     document.getElementById("currentBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
 

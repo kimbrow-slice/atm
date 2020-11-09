@@ -117,38 +117,37 @@ function getBalance() {
 
 
 //function 6 Change pin of the bank account
-
 function changePin() {
-
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
 
-    let newPin = parseInt(document.getElementById('changePin').value);
+    let pin = parseInt(document.getElementById('changePin').value);
+    let newPin = {
 
-    bankAccounts[currentAcctIndex].pin = newPin;
+        "pin": pin,
+        "balance": bankAccounts[currentAcctIndex].balance
+    };
 
-    if ((bankAccounts[currentAcctIndex].pin != newPin)) {
-        alert("Your PIN has been changed!");
+    for (let i = 0; i < bankAccounts.length; i++) {
+
+        if (bankAccounts[i].pin === pin) {
+            alert('You already have an account!');
+
+            if (confirm("Would like access your account?")) {
+                window.location = "atm.html"
+            }
+
+            return;
+        }
     }
+
+
+    bankAccounts.push(newPin);
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
 
-    if (bankAccounts[currentAcctIndex].pin === newPin) {
-        alert('That is already a PIN numbner');
-        alert('Please try another PIN');
+    alert('Your PIN Has Been Changed!')
+
+    if (confirm("Would like access your account?")) {
+        window.location = "atm.html"
     }
-
     return;
-
 }
-
-document.getElementById("changePin").innerHTML = parseInt(document.getElementById('changePin').value);
-
-//we are going to create a for in function that allows for the user to input a 4 digit pin(if any more digits than 4 are input it should alert the user with an invalid input option)
-
-
-// USE LOCAL STORAGE FOR ACCESS ACROSS SESSIONS
-//function 7
-// myStorage = window.localStorage;
-
-// window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
-
-// console.log(JSON.parse(window.localStorage.getItem('bankAccounts')));

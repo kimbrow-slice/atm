@@ -84,7 +84,7 @@ function withdraw() {
     // if (account[currentAcctIndex].balance <= amount) {
     //     alert("Sorry, you do not have enough within your account!")
     // }
-    // else if (account[currentAcctIndex].balance = amount ){
+    // else (account[currentAcctIndex].balance = amount ) {
     bankAccounts[currentAcctIndex].balance -= amount;
 
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));

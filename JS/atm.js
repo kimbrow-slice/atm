@@ -69,10 +69,15 @@ function withdraw() {
     //let acct = acctExist(pin);
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
     let amount = parseInt(document.getElementById("withd").value);
+    // if (account[currentAcctIndex].balance <= amount) {
+    //     alert("Sorry, you do not have enough within your account!")
+    // }
+    // else if (account[currentAcctIndex].balance = amount ){
     bankAccounts[currentAcctIndex].balance -= amount;
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
     document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
 }
+//}
 //create a function to deposit money into the indexed account
 
 function deposit() {

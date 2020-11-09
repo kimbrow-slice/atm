@@ -117,16 +117,36 @@ function getBalance() {
 
 
 //function 6 Change pin of the bank account
-/*
- */
+
+function changePin() {
+
+    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+
+    let newPin = parseInt(document.getElementById('changePin').value);
+
+    bankAccounts[currentAcctIndex].pin = newPin;
+
+    if ((bankAccounts[currentAcctIndex].pin != newPin)) {
+        alert("Your PIN has been changed!");
+    }
+    window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+
+    if (bankAccounts[currentAcctIndex].pin === newPin) {
+        alert('That is already a PIN numbner');
+        alert('Please try another PIN');
+    }
+
+    return;
+
+}
+
+document.getElementById("changePin").innerHTML = parseInt(document.getElementById('changePin').value);
 
 //we are going to create a for in function that allows for the user to input a 4 digit pin(if any more digits than 4 are input it should alert the user with an invalid input option)
 
 
 // USE LOCAL STORAGE FOR ACCESS ACROSS SESSIONS
 //function 7
-//read the debugging and exploring of the color game lab to view how we set local storage to session storage and reverse engineer that to make it where each input it kept throughout multiple session
-
 // myStorage = window.localStorage;
 
 // window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));

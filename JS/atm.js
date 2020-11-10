@@ -14,7 +14,7 @@ if (window.localStorage["bankAccounts"] !== undefined) {
 
 
 function getAccount() {
-
+    document.getElementById("newPin").style.display = "block";
     let pin = parseInt(document.getElementById("pinput").value);
 
     for (let i = 0; i < bankAccounts.length; i++) {
@@ -118,7 +118,19 @@ function getBalance() {
 
 //function 6 Change pin of the bank account
 function changePin() {
+
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+
+    let oldAcctIndex = currentAcctIndex;
+
+
+    function removePIN(index) {
+        bankAccounts.splice(index, 1);
+        window.localStorage.setItem("bankAccounts", JSON.stringify(bankAccounts));
+        currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+    }
+
+
 
     let pin = parseInt(document.getElementById('changePin').value);
     let newPin = {
@@ -126,7 +138,7 @@ function changePin() {
         "pin": pin,
         "balance": bankAccounts[currentAcctIndex].balance
     };
-
+    removePIN(oldAcctIndex);
     for (let i = 0; i < bankAccounts.length; i++) {
 
         if (bankAccounts[i].pin === pin) {
@@ -151,3 +163,8 @@ function changePin() {
     }
     return;
 }
+
+
+
+
+//NOTES FOR IMPROVMENTS

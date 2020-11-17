@@ -77,34 +77,64 @@ function createAccount() {
 //create a function to withdraw money into the indexed account
 
 function withdraw() {
-    //let acct = acctExist(pin);
+
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
 
+    if (confirm("This ATM charges $4.95 per transaction.")) {
+        message = "Okay I guess!";
+    } else {
+        return;
+    }
+
+    //Amount must be increments of $20 max of $200
+    //for (x = 0; x < 200; x ++) {
+    // if x  < $200 let it happen
+    //else NO }
+
+
     let amount = parseInt(document.getElementById("withd").value);
-    // if (account[currentAcctIndex].balance <= amount) {
-    //     alert("Sorry, you do not have enough within your account!")
-    // }
-    // else (account[currentAcctIndex].balance = amount ) {
-    bankAccounts[currentAcctIndex].balance -= amount;
 
-    window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+    if (amount <= 200 && (amount % 20 === 0) && (amount < bankAccounts[currentAcctIndex].balance)) {
+        bankAccounts[currentAcctIndex].balance -= amount;
 
-    document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+        window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+
+        document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+    } else {
+        alert('The max limit is $200 and must be increments of $20!')
+    }
+
+    // bankAccounts[currentAcctIndex].balance -= amount;
+
+
 }
-//}
+
 //create a function to deposit money into the indexed account
 
 function deposit() {
     //let acct =acctExist(pin from local storage); 
     currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
 
+    if (confirm("This ATM charges $4.95 per transaction.")) {
+        message = "Okay I guess!";
+    } else {
+        return;
+    }
+
     let addMoney = parseInt(document.getElementById("depo").value);
 
-    bankAccounts[currentAcctIndex].balance += addMoney;
+    if (addMoney <= 200 && (addMoney % 20 === 0)) {
+        bankAccounts[currentAcctIndex].balance += addMoney;
 
-    window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
+        window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
 
-    document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+        document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+    } else {
+        alert('The max limit is $200 and must be increments of $20!')
+    }
+
+    // bankAccounts[currentAcctIndex].balance += addMoney;
+
 }
 //create a function to check the balance of the currentAccount
 
@@ -129,8 +159,6 @@ function changePin() {
         window.localStorage.setItem("bankAccounts", JSON.stringify(bankAccounts));
         currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
     }
-
-
 
     let pin = parseInt(document.getElementById('changePin').value);
     let newPin = {
@@ -164,7 +192,14 @@ function changePin() {
     return;
 }
 
-
+// function displayDate() {
+//     document.getElementById("showDate").innerHTML = new Date();
+// }
 
 
 //NOTES FOR IMPROVMENTS
+// Create a function to check the validity of the transaction
+
+// function transactionValid(amount){
+//     return (amount <= 200 && (amount % 20 === 0));
+// }

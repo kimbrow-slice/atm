@@ -15,10 +15,25 @@
     <link rel="icon" type="image/png" href="imgs/favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+
+    <script>
+        function displayTimeDate() {
+            var refresh = 1000; // Refresh rate in milli seconds
+            mytime = setTimeout('display_DateTime()', refresh)
+        }
+
+        function display_DateTime() {
+            var x = new Date()
+            document.getElementById('CST').innerHTML = x;
+            displayTimeDate();
+        }
+    </script>
 
 </head>
 
-<body>
+<body onload=display_DateTime();>
     <!--NAV-->
 
 
@@ -40,10 +55,12 @@
             <a class="home" href="balance.html">Check Balance</a> ||
 
             <a class="home" href="index.html">Sign Out</a>
-
+            <br>
+            <br>
+            <span id='CST'></span>
             <div id="withdraw">
                 <p>How Much Would You Like To Withdraw?</p>
-                <input id="withd">
+                <input id="withd" type="number" placeholder="Enter Amount" max="200" min="20" onKeyDown="if(this.value.length==3 && event.keyCode>47 && event.keyCode < 58)return false;">
                 <button class="withdraw" onclick="withdraw()">Withdraw</button>
                 <p>New Balance:</p>
                 <p id="newBalance"></p>
@@ -51,11 +68,13 @@
 
             <div id="deposit">
                 <p>How Much Would You Like To Deposit?</p>
-                <input id="depo">
+                <input id="depo" type="number" placeholder="Enter Amount" max="200" min="20" onKeyDown="if(this.value.length==3 && event.keyCode>47 && event.keyCode < 58)return false;">
                 <button class="Deposit" onclick="deposit()">Deposit</button>
                 <p>New Balance:</p>
                 <p id="updateBalance"></p>
             </div>
+
+
 
         </div>
     </section>

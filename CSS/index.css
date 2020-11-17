@@ -67,3 +67,16 @@ h2 {
 #newPin {
     display: none;
 }
+
+#CST {
+    color: #59606d;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#pinput,
+#changePin,
+#getAcct,
+#withd,
+#depo {
+    width: 250px;
+}

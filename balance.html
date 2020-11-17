@@ -15,10 +15,25 @@
     <link rel="icon" type="image/png" href="imgs/favicon.png">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet">
+
+    <script>
+        function displayTimeDate() {
+            var refresh = 1000; // Refresh rate in milli seconds
+            mytime = setTimeout('display_DateTime()', refresh)
+        }
+
+        function display_DateTime() {
+            var x = new Date()
+            document.getElementById('CST').innerHTML = x;
+            displayTimeDate();
+        }
+    </script>
 
 </head>
 
-<body>
+<body onload=display_DateTime();>
     <!--NAV-->
 
 
@@ -42,15 +57,16 @@
             <a class="home" href="transaction.html">Make A Transaction</a> ||
 
             <a class="home" href="index.html">Sign Out</a>
-
-
-
+            <br>
+            <br>
+            <span id='CST'></span>
             <div id="getBal">
                 <p>Would You Like To Check Your Balance?</p>
                 <button class="Balance" onclick="getBalance()">Balance</button>
                 <p>Current Balance:</p>
                 <p id="currentBalance"></p>
             </div>
+
 
         </div>
 

@@ -123,7 +123,7 @@ function deposit() {
 
     let addMoney = parseFloat(document.getElementById("depo").value);
 
-    if (addMoney <= 200 && (addMoney % 20 === 0)) {
+    if (addMoney <= 200 && (addMoney % 20 === 0) && (addMoney != 0)) {
         bankAccounts[currentAcctIndex].balance += addMoney - 4.95;
 
         window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));

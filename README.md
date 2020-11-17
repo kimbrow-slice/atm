@@ -23,3 +23,5 @@ For Lab3 you will be creating an ATM program.
 * The code should be well documented with comments, have good code structure, and follow naming conventions.
 
 * Push your code to your repository.
+
+* Added the refactoring assignment as well

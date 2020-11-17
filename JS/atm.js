@@ -15,7 +15,7 @@ if (window.localStorage["bankAccounts"] !== undefined) {
 
 function getAccount() {
     document.getElementById("newPin").style.display = "block";
-    let pin = parseInt(document.getElementById("pinput").value);
+    let pin = parseFloat(document.getElementById("pinput").value);
 
     for (let i = 0; i < bankAccounts.length; i++) {
 
@@ -42,7 +42,7 @@ function getAccount() {
 
 function createAccount() {
 
-    let pin = parseInt(document.getElementById('getAcct').value);
+    let pin = parseFloat(document.getElementById('getAcct').value);
     let newAccount = {
 
         "pin": pin,
@@ -78,7 +78,7 @@ function createAccount() {
 
 function withdraw() {
 
-    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+    currentAcctIndex = parseFloat(window.localStorage.getItem('currentAcctIndex'));
 
     if (confirm("This ATM charges $4.95 per transaction.")) {
         message = "Okay I guess!";
@@ -92,14 +92,14 @@ function withdraw() {
     //else NO }
 
 
-    let amount = parseInt(document.getElementById("withd").value);
+    let amount = parseFloat(document.getElementById("withd").value);
 
-    if (amount <= 200 && (amount % 20 === 0) && (amount < bankAccounts[currentAcctIndex].balance)) {
-        bankAccounts[currentAcctIndex].balance -= amount;
+    if (amount <= 200 && (amount % 20 === 0) && (amount < bankAccounts[currentAcctIndex].balance.toFixed(2))) {
+        bankAccounts[currentAcctIndex].balance -= amount + 4.95;
 
         window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
 
-        document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+        document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance.toFixed(2)
     } else {
         alert('The max limit is $200 and must be increments of $20!')
     }
@@ -113,7 +113,7 @@ function withdraw() {
 
 function deposit() {
     //let acct =acctExist(pin from local storage); 
-    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+    currentAcctIndex = parseFloat(window.localStorage.getItem('currentAcctIndex'));
 
     if (confirm("This ATM charges $4.95 per transaction.")) {
         message = "Okay I guess!";
@@ -121,14 +121,14 @@ function deposit() {
         return;
     }
 
-    let addMoney = parseInt(document.getElementById("depo").value);
+    let addMoney = parseFloat(document.getElementById("depo").value);
 
     if (addMoney <= 200 && (addMoney % 20 === 0)) {
-        bankAccounts[currentAcctIndex].balance += addMoney;
+        bankAccounts[currentAcctIndex].balance += addMoney - 4.95;
 
         window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
 
-        document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+        document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance.toFixed(2)
     } else {
         alert('The max limit is $200 and must be increments of $20!')
     }
@@ -140,16 +140,16 @@ function deposit() {
 
 function getBalance() {
 
-    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+    currentAcctIndex = parseFloat(window.localStorage.getItem('currentAcctIndex'));
 
-    document.getElementById("currentBalance").innerHTML = bankAccounts[currentAcctIndex].balance
+    document.getElementById("currentBalance").innerHTML = bankAccounts[currentAcctIndex].balance.toFixed(2)
 }
 
 
 //function 6 Change pin of the bank account
 function changePin() {
 
-    currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+    currentAcctIndex = parseFloat(window.localStorage.getItem('currentAcctIndex'));
 
     let oldAcctIndex = currentAcctIndex;
 
@@ -157,14 +157,14 @@ function changePin() {
     function removePIN(index) {
         bankAccounts.splice(index, 1);
         window.localStorage.setItem("bankAccounts", JSON.stringify(bankAccounts));
-        currentAcctIndex = parseInt(window.localStorage.getItem('currentAcctIndex'));
+        currentAcctIndex = parseFloat(window.localStorage.getItem('currentAcctIndex'));
     }
 
-    let pin = parseInt(document.getElementById('changePin').value);
+    let pin = parseFloat(document.getElementById('changePin').value);
     let newPin = {
 
         "pin": pin,
-        "balance": bankAccounts[currentAcctIndex].balance
+        "balance": bankAccounts[currentAcctIndex].balance.toFixed(2)
     };
     removePIN(oldAcctIndex);
     for (let i = 0; i < bankAccounts.length; i++) {

@@ -24,15 +24,11 @@ function getAccount() {
             currentAcctIndex = i;
             window.localStorage.setItem('currentAcctIndex', i);
 
-
-
             return;
             //  return bankAccounts[i]; 
         }
-
     }
-    //I need to create an option that allows the user to create a bank account with a unqiue pin
-    alert("Invaliad PIN!")
+    alert("Invaliad PIN!");
 
     if (confirm("Would you like to create an account?")) {
         window.location = "index.html";
@@ -41,7 +37,7 @@ function getAccount() {
 }
 
 function createAccount() {
-
+    //I need to create an option that allows the user to create a bank account with a unqiue pin
     let pin = parseFloat(document.getElementById('getAcct').value);
     let newAccount = {
 
@@ -66,7 +62,7 @@ function createAccount() {
     bankAccounts.push(newAccount);
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
 
-    alert('Your Account Has Been Created!')
+    alert('Your Account Has Been Created!');
 
     if (confirm("Would like access your account?")) {
         window.location = "atm.html"
@@ -101,18 +97,14 @@ function withdraw() {
 
         document.getElementById("newBalance").innerHTML = bankAccounts[currentAcctIndex].balance.toFixed(2)
     } else {
-        alert('The max limit is $200 and must be increments of $20!')
+        alert('The max limit is $200 and must be increments of $20!');
     }
-
-    // bankAccounts[currentAcctIndex].balance -= amount;
-
-
 }
 
 //create a function to deposit money into the indexed account
 
 function deposit() {
-    //let acct =acctExist(pin from local storage); 
+
     currentAcctIndex = parseFloat(window.localStorage.getItem('currentAcctIndex'));
 
     if (confirm("This ATM charges $4.95 per transaction.")) {
@@ -130,12 +122,10 @@ function deposit() {
 
         document.getElementById("updateBalance").innerHTML = bankAccounts[currentAcctIndex].balance.toFixed(2)
     } else {
-        alert('The max limit is $200 and must be increments of $20!')
+        alert('The max limit is $200 and must be increments of $20!');
     }
-
-    // bankAccounts[currentAcctIndex].balance += addMoney;
-
 }
+
 //create a function to check the balance of the currentAccount
 
 function getBalance() {
@@ -147,13 +137,14 @@ function getBalance() {
 
 
 //function 6 Change pin of the bank account
+
 function changePin() {
 
     currentAcctIndex = parseFloat(window.localStorage.getItem('currentAcctIndex'));
 
     let oldAcctIndex = currentAcctIndex;
 
-
+    //function to remove old pin and allowing it to be reused
     function removePIN(index) {
         bankAccounts.splice(index, 1);
         window.localStorage.setItem("bankAccounts", JSON.stringify(bankAccounts));
@@ -184,18 +175,13 @@ function changePin() {
     bankAccounts.push(newPin);
     window.localStorage.setItem('bankAccounts', JSON.stringify(bankAccounts));
 
-    alert('Your PIN Has Been Changed!')
+    alert('Your PIN Has Been Changed!');
 
     if (confirm("Would like access your account?")) {
         window.location = "atm.html"
     }
     return;
 }
-
-// function displayDate() {
-//     document.getElementById("showDate").innerHTML = new Date();
-// }
-
 
 //NOTES FOR IMPROVMENTS
 // Create a function to check the validity of the transaction
